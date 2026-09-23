@@ -1,26 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg-void: #030508;
+  --bg-space: #070A10;
+  --bg-panel: #0D111A;
+  --bg-surface: #121824;
+  --border-subtle: #1C2433;
+  --border-active: #FF6B00;
+  --orange-primary: #FF6B00;
+  --orange-glow: #FF5500;
+  --orange-amber: #FF9500;
+  --silver-metal: #94A3B8;
+  --silver-light: #E2E8F0;
+  --laser-cyan: #00F0FF;
+  --status-green: #10B981;
+  --tricolor-saffron: #FF9933;
+  --tricolor-white: #FFFFFF;
+  --tricolor-green: #138808;
+  --tricolor-chakra: #000088;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-void);
+  color: #E2E8F0;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  selection-background-color: #FF6B00;
+  selection-color: #030508;
+}
+
+::selection {
+  background: #FF6B00;
+  color: #030508;
+}
+
+/* Typography Classes */
+.font-display {
+  font-family: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.font-mono-tech {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+/* Background Grids & Scanlines */
+.aerospace-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 107, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 107, 0, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.aerospace-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(255, 107, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 107, 0, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.aerospace-dots {
+  background-image: radial-gradient(rgba(255, 107, 0, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.scanlines {
+  position: relative;
+}
+.scanlines::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+  z-index: 20;
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Tactical Glassmorphism & HUD Styling */
+.hud-glass {
+  background: rgba(13, 17, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 107, 0, 0.15);
+}
+
+.hud-glass-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hud-glass-hover:hover {
+  background: rgba(18, 24, 36, 0.85);
+  border-color: rgba(255, 107, 0, 0.45);
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.15);
+}
+
+/* HUD Corner Brackets */
+.hud-bracket-container {
+  position: relative;
+}
+.hud-bracket-container::before,
+.hud-bracket-container::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  border-color: #FF6B00;
+}
+.hud-bracket-container::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #FF6B00;
+  border-left: 2px solid #FF6B00;
+}
+.hud-bracket-container::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #FF6B00;
+  border-right: 2px solid #FF6B00;
+}
+
+/* Glow effects */
+.glow-orange-sm {
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.25);
+}
+.glow-orange-md {
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.35);
+}
+.glow-orange-text {
+  text-shadow: 0 0 12px rgba(255, 107, 0, 0.6);
+}
+
+/* Tricolor Indian Accent Line */
+.tricolor-accent {
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #FF9933 0%, 
+    #FF9933 33%, 
+    #FFFFFF 33%, 
+    #000088 50%,
+    #FFFFFF 66%, 
+    #138808 66%, 
+    #138808 100%);
+  background-size: 200% 100%;
+  animation: tricolorPulse 6s ease infinite;
+}
+
+@keyframes tricolorPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Radar Sweep Keyframe */
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-radar {
+  animation: radarSweep 4s linear infinite;
+  transform-origin: center center;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #030508;
+}
+::-webkit-scrollbar-thumb {
+  background: #1C2433;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6B00;
 }
